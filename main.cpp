@@ -1,4 +1,5 @@
 
+
 #ifdef _WIN32
 
 #define _WINSOCKAPI_ 
@@ -19,8 +20,11 @@
 #include "GUI/GUIlowlevel.h"
 #include "GUI/GUI.h"
 #include "ClientManager/ClientManager.h"
+#include "Viewer.h"
 
 std::unique_ptr<ClientManager> clientManager;
+std::unique_ptr<Viewer> viewer;
+
 
 
 void _start_(
@@ -56,9 +60,12 @@ void _start_(
     gui->hInstance = hInstance;
 #endif    
     clientManager = std::make_unique<ClientManager>(gui);
+    viewer = std::make_unique<Viewer>(gui);
     
     clientManager->run();
     //clientManager.reset();
+    
+    viewer->run();
     
     clientManager->wait();
     

@@ -708,6 +708,27 @@ LRESULT GUIwindow::WM_PAINT_(HWND hw, UINT msg, WPARAM wp, LPARAM lp) {
     EndPaint(m_hwnd, &ps);
     return 0; // ok  
 }
+
+LRESULT GUIwindow::WM_KEYDOWN_(HWND hw, UINT msg, WPARAM wp, LPARAM lp) {
+
+    wchar_t wbuffer[8];
+    BYTE lpKeyState[256];
+    GetKeyboardState(lpKeyState);
+    if(ToUnicode(wp, HIWORD(lp) & 0xFF, lpKeyState, wbuffer, 8, 0) == 1) {
+        window_user_event.type = WindowUserEvent::UserEventType::uev_KeyPress;
+        window_user_event.keycode = wbuffer[0];
+        StaticUserInput(parent, &window_user_event);    
+    } else {
+        printf("ToUnicode error\n");
+    }
+    
+    
+    
+    //char_keydown(msg, wp, lp, wbuffer);
+
+    return 0;
+};
+
 #endif // w32
 
 void GUIwindow::need_refresh() {
