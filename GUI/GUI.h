@@ -63,7 +63,7 @@ class GUI {
 public:
     
 #ifdef __linux__
-    LINUX_PARAM linux;
+    LINUX_PARAM linuxx;
 #endif
     
 #ifdef _WIN32

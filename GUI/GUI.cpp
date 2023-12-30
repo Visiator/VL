@@ -28,11 +28,11 @@ GUI::GUI() : window_list(this) {
     printf("GUI constructor1\n");
 
 #ifdef __linux__
-    if ((linux.display_ = XOpenDisplay(getenv("DISPLAY"))) == NULL) {
+    if ((linuxx.display_ = XOpenDisplay(getenv("DISPLAY"))) == NULL) {
         wtf("Can't connect X server");//, strerror(errno));
         return;
     }
-    linux.screen_id = XDefaultScreen(linux.display_);
+    linuxx.screen_id = XDefaultScreen(linuxx.display_);
 #endif
 }
 
@@ -40,7 +40,7 @@ GUI::~GUI() {
     
     printf("GUI destructor\n");
 #ifdef __linux__
-    XCloseDisplay(linux.display_);
+    XCloseDisplay(linuxx.display_);
 #endif
 }
 

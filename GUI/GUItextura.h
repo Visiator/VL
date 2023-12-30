@@ -27,7 +27,11 @@ public:
     uint16_t reserved2;
     uint32_t offBits;
     uint32_t bitmapinfo_ver;
-};// __attribute__((packed));
+}
+#ifdef __linux__
+__attribute__((packed))
+#endif
+;
 
 struct _BMP_header_part2 {
 public:    
@@ -41,7 +45,11 @@ public:
     uint32_t biYPelsPerMeter;
     uint32_t clrused;
     uint32_t clrimportant;
-};// __attribute__((packed));
+}
+#ifdef __linux__
+__attribute__((packed))
+#endif
+;
 
 END_ATTRIBUTE_PACKED
 

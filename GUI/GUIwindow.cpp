@@ -12,8 +12,8 @@
 //#define _WIN32
 
 #include <thread>
-
 #include <stdio.h>
+#include <X11/Xlib.h>
 
 #include "../tools.h"
 #include "GUIwindow.h"
@@ -137,11 +137,11 @@ GUIwindow::GUIwindow(GUI *gui, std::string name, GUIwindow::window_mode mode, RE
     screen->set_size(rectangle.getw(), rectangle.geth());
     
 #ifdef __linux__    
-    window = XCreateSimpleWindow(gui->linux.display_
-                                 , RootWindow(gui->linux.display_, gui->linux.screen_id)
+    window = XCreateSimpleWindow(gui->linuxx.display_
+                                 , RootWindow(gui->linuxx.display_, gui->linuxx.screen_id)
                                  , rectangle.getx(), rectangle.gety(), rectangle.getw(), rectangle.geth(), 10
-                                 , XBlackPixel(gui->linux.display_, gui->linux.screen_id)
-                                 , XWhitePixel(gui->linux.display_, gui->linux.screen_id)
+                                 , XBlackPixel(gui->linuxx.display_, gui->linuxx.screen_id)
+                                 , XWhitePixel(gui->linuxx.display_, gui->linuxx.screen_id)
                                 );
     
     /* эта переменная будет содержать дескриптор новой пиксельной карты */
@@ -149,36 +149,36 @@ GUIwindow::GUIwindow(GUI *gui, std::string name, GUIwindow::window_mode mode, RE
 
     /* эта переменная будет содержать дескриптор корневого окна экрана, */
     /* для которого создадим пиксельную карту          */
-    Window window = DefaultRootWindow(gui->linux.display_);
+    Window window = DefaultRootWindow(gui->linuxx.display_);
 
     /* эта переменная будет содержать глубину цвета создаваемой */
     /* пиксельной карты - количество бит, используемых для   */
     /* представления индекса цвета в палитре (количество цветов */
     /* равно степени двойки глубины)              */
-    int depth = DefaultDepth(gui->linux.display_, DefaultScreen(gui->linux.display_));
+    int depth = DefaultDepth(gui->linuxx.display_, DefaultScreen(gui->linuxx.display_));
 
     /* создаем новую пиксельную карту шириной 30 и высотой в 40 пикселей */
-    pixmap = XCreatePixmap(gui->linux.display_, window, 16, 16, depth);
+    pixmap = XCreatePixmap(gui->linuxx.display_, window, 16, 16, depth);
 
     /* для полноты ощущений нарисуем точку в центре пиксельной карты */
-    //XDrawPoint(gui->linux.display_, pixmap, gc, 15, 20);    
+    //XDrawPoint(gui->linuxx.display_, pixmap, gc, 15, 20);    
 
     
     char *argv_[] = {(char *)"Visiator", (char *)"", NULL};
     /* Задаем рекомендации для менеджера окон */
-    SetWindowManagerHints ( gui->linux.display_, (char *)"Visiator",
+    SetWindowManagerHints ( gui->linuxx.display_, (char *)"Visiator",
     argv_, 1,
     window, rectangle.getx(), rectangle.gety(), rectangle.getw(), rectangle.geth(),
     rectangle.getw(), rectangle.geth(),
     (char *)"WND_TITLE", (char *)"WND_ICON_TITLE", pixmap
     );
     
-    gui->linux.graph_ctx=XCreateGC(gui->linux.display_, window, 0, gui->linux.gc_values);
+    gui->linuxx.graph_ctx=XCreateGC(gui->linuxx.display_, window, 0, gui->linuxx.gc_values);
     
     image = XCreateImage(
-            gui->linux.display_, 
-            DefaultVisual(gui->linux.display_, DefaultScreen(gui->linux.display_)),
-            DefaultDepth(gui->linux.display_, DefaultScreen(gui->linux.display_)),
+            gui->linuxx.display_, 
+            DefaultVisual(gui->linuxx.display_, DefaultScreen(gui->linuxx.display_)),
+            DefaultDepth(gui->linuxx.display_, DefaultScreen(gui->linuxx.display_)),
             ZPixmap,
             0,
             (char*) screen->buffer,
@@ -225,18 +225,18 @@ void GUIwindow::execute() {
     XEvent      exppp;
     XEvent      event;
     
-    XSelectInput(gui->linux.display_, window, ExposureMask | StructureNotifyMask | KeyPressMask | PointerMotionMask | ButtonPressMask );
+    XSelectInput(gui->linuxx.display_, window, ExposureMask | StructureNotifyMask | KeyPressMask | PointerMotionMask | ButtonPressMask );
      
     //Показываем окно на экране
-    XMapWindow(gui->linux.display_, window);
+    XMapWindow(gui->linuxx.display_, window);
     
     
     while(need__stop == false) {
         
-            if (XPending(gui->linux.display_)) 
+            if (XPending(gui->linuxx.display_)) 
             {
                 try {
-                    XNextEvent(gui->linux.display_, &event);
+                    XNextEvent(gui->linuxx.display_, &event);
                 } catch(...) {
                     printf("catch 1\n");
                 }
@@ -258,7 +258,7 @@ void GUIwindow::execute() {
                         event_paint();
                         /* Запрос на перерисовку */
                         if (event.xexpose.count != 0) break;
-                        prGC = XCreateGC(gui->linux.display_, window, 0, nullptr);
+                        prGC = XCreateGC(gui->linuxx.display_, window, 0, nullptr);
                         /*XSetForeground ( prDisplay, prGC, BlackPixel ( prDisplay, 0) );
                         XDrawString ( prDisplay, nWnd, prGC, 10,
                         50,
@@ -266,13 +266,13 @@ void GUIwindow::execute() {
                         world!",
                         strlen
                         world!" ) );*/
-                        XPutImage(gui->linux.display_, window, gui->linux.graph_ctx, image, 0, 0, 0, 0, screen->w, screen->h);//DISPLAY_WIDTH, DISPLAY_HEIGHT);
-                        XFreeGC ( gui->linux.display_, prGC );
+                        XPutImage(gui->linuxx.display_, window, gui->linuxx.graph_ctx, image, 0, 0, 0, 0, screen->w, screen->h);//DISPLAY_WIDTH, DISPLAY_HEIGHT);
+                        XFreeGC ( gui->linuxx.display_, prGC );
                         
                         
                         
                     
-                        //XSetForeground (gui->linux.display_, gui->linux.graph_ctx, 0x337700);
+                        //XSetForeground (gui->linuxx.display_, gui->linuxx.graph_ctx, 0x337700);
                         //printf("Expose\n");
                         break;
                     case ConfigureNotify:
@@ -296,7 +296,7 @@ void GUIwindow::execute() {
                             memset(&exppp, 0, sizeof(exppp));
                             exppp.type = Expose;
                             exppp.xexpose.window = window;
-                            XSendEvent(gui->linux.display_, window, False, ExposureMask, &exppp);
+                            XSendEvent(gui->linuxx.display_, window, False, ExposureMask, &exppp);
                         }
                         break;
                     case ReparentNotify:
@@ -336,7 +336,7 @@ void GUIwindow::execute() {
                     memset(&exppp, 0, sizeof(exppp));
                     exppp.type = Expose;
                     exppp.xexpose.window = window;
-                    XSendEvent(gui->linux.display_, window, False, ExposureMask, &exppp);
+                    XSendEvent(gui->linuxx.display_, window, False, ExposureMask, &exppp);
                 }
                 usleep(10);
             }
