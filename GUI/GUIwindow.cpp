@@ -735,7 +735,7 @@ void GUIwindow::event_paint() {
 void GUIwindow::exit() {
     printf("exit()\n");
 #ifdef __linux__
-    XDestroyWindow(gui->linux.display_, window);
+    XDestroyWindow(gui->linuxx.display_, window);
 #endif
 #ifdef _WIN32
     PostQuitMessage(0);

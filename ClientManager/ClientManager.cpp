@@ -68,24 +68,24 @@ void ClientManager::init_textures() {
     gui_items.textura_list.add( "btn_autorun_white.bmp" ,    "btn_auto_w");
   
     gui_items.textura_list.add( "panel_incoming.bmp" , "panel_incoming");
-    gui_items.textura_list.add( "inc/panel_outgoing.bmp" , "panel_outgoing");
-    gui_items.textura_list.add( "inc/panel_autorun.bmp" , "panel_autorun");
+    gui_items.textura_list.add( "panel_outgoing.bmp" , "panel_outgoing");
+    gui_items.textura_list.add( "panel_autorun.bmp" , "panel_autorun");
 
-    gui_items.textura_list.add( "inc/krest_black.bmp" , "krest_black");
-    gui_items.textura_list.add( "inc/krest_blue.bmp" , "krest_blue");
-    gui_items.textura_list.add( "inc/krest_white.bmp" , "krest_white");
+    gui_items.textura_list.add( "krest_black.bmp" , "krest_black");
+    gui_items.textura_list.add( "krest_blue.bmp" , "krest_blue");
+    gui_items.textura_list.add( "krest_white.bmp" , "krest_white");
     
-    gui_items.textura_list.add( "inc/checkbox.bmp" , "checkbox");
-    gui_items.textura_list.add( "inc/checkbox_set.bmp" , "checkbox_set");
+    gui_items.textura_list.add( "checkbox.bmp" , "checkbox");
+    gui_items.textura_list.add( "checkbox_set.bmp" , "checkbox_set");
     
-    gui_items.textura_list.add( "inc/btn_connect_normal.bmp" , "btn_connect_normal");
-    gui_items.textura_list.add( "inc/btn_connect_pressed.bmp" , "btn_connect_pressed");
+    gui_items.textura_list.add( "btn_connect_normal.bmp" , "btn_connect_normal");
+    gui_items.textura_list.add( "btn_connect_pressed.bmp" , "btn_connect_pressed");
     
-    gui_items.textura_list.add( "inc/btn_save_normal.bmp" , "btn_save_normal");
-    gui_items.textura_list.add( "inc/btn_save_pressed.bmp" , "btn_save_pressed");
+    gui_items.textura_list.add( "btn_save_normal.bmp" , "btn_save_normal");
+    gui_items.textura_list.add( "btn_save_pressed.bmp" , "btn_save_pressed");
 
-    gui_items.textura_list.add( "inc/btn_www_normal.bmp" , "btn_www_normal");
-    gui_items.textura_list.add( "inc/btn_www_pressed.bmp" , "btn_www_pressed");
+    gui_items.textura_list.add( "btn_www_normal.bmp" , "btn_www_normal");
+    gui_items.textura_list.add( "btn_www_pressed.bmp" , "btn_www_pressed");
 
     //btn_inc_yel = textura_list.get_textura_by_id("btn_inc_yel");
 }
@@ -127,11 +127,11 @@ bool ClientManager::InitGUIitems() {
     gui_items.addd("btn_save_pressed", "panel_autorun", GUIitem::ItemType::panel, _FRAME(102, 162, 122, 46), gui_items.textura_list.get_textura_by_id("btn_save_pressed"), false, true );
     
     
-    gui_items.addd("btn_inc_w",  "panel1", GUIitem::ItemType::panel, _FRAME(0, 0, 77, 65),   gui_items.textura_list.get_textura_by_id("btn_inc_w"), false );
-    gui_items.addd("btn_out_w",  "panel1", GUIitem::ItemType::panel, _FRAME(77, 0, 80, 65),  gui_items.textura_list.get_textura_by_id("btn_out_w"), true );
-    gui_items.addd("btn_auto_w", "panel1", GUIitem::ItemType::panel, _FRAME(157, 0, 77, 65), gui_items.textura_list.get_textura_by_id("btn_auto_w"), true );
+    //gui_items.addd("btn_inc_w",  "panel1", GUIitem::ItemType::panel, _FRAME(0, 0, 77, 65),   gui_items.textura_list.get_textura_by_id("btn_inc_w"), false );
+    //gui_items.addd("btn_out_w",  "panel1", GUIitem::ItemType::panel, _FRAME(77, 0, 80, 65),  gui_items.textura_list.get_textura_by_id("btn_out_w"), true );
+    //gui_items.addd("btn_auto_w", "panel1", GUIitem::ItemType::panel, _FRAME(157, 0, 77, 65), gui_items.textura_list.get_textura_by_id("btn_auto_w"), true );
 
-    for(size_t i=0; i < gui_items.items.size(); i++ ) {
+    for(int i=0; i < gui_items.items.size(); i++ ) {
         if(gui_items.items[i].parent_id != "" &&
            gui_items.items[i].parent == nullptr)
         {
