@@ -13,8 +13,7 @@
 
 #include <thread>
 #include <stdio.h>
-#include <X11/Xlib.h>
-
+/////
 #include "../tools.h"
 #include "GUIwindow.h"
 #include "GUI.h"
