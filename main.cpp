@@ -48,19 +48,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 int g_1 = 0;
 #ifdef __linux__
-
-//void *SigCatcher(int n)
-//{
-//  wait3(NULL,WNOHANG,NULL);
-//}
-
-
-
-    
-    //boost::array<int, 4> arr = {{1,2,3,4}};
-    
-    //signal(SIGCHLD,SigCatcher);
-    
+int main(int argc, char** argv)
+{
     _start_();
 }
 #endif

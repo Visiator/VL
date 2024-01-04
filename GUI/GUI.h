@@ -34,11 +34,11 @@
 #ifdef __linux__
 class LINUX_PARAM {
 public:
-    //Display     *display_ = nullptr;
+    Display     *display_ = nullptr;
     //Window      window = 0;
-    //int         screen_id = 0;
-    //GC          graph_ctx = 0;
-    //XGCValues   *gc_values = nullptr;
+    int         screen_id = 0;
+    GC          graph_ctx = 0;
+    XGCValues   *gc_values = nullptr;
     //XImage      *image;
     /*MOUSE_BUTTON_TYPE DetectButtonTypeLinux(unsigned int v) {
         if(v == 1) return MOUSE_BUTTON_TYPE::left;
@@ -72,8 +72,8 @@ public:
 #endif
     
     FONTS fonts;
-    //std::unique_ptr<GUIlowlevel> gui_low_level;
-    std::unique_ptr<GUIwindowList> window_list;
+    std::unique_ptr<GUIlowlevel> gui_low_level;
+    GUIwindowList window_list;
     void invalidate();
     void test();
  
